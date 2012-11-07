@@ -1,6 +1,6 @@
 # RDActivityViewController
 
-This is a simple override of ![UIActivityViewController](http://developer.apple.com/library/ios/#documentation/UIKit/Reference/UIActivityViewController_Class/Reference/Reference.html%23//apple_ref/occ/cl/UIActivityViewController) which makes it easier to set multiple items for each UIActivityType.
+This is a simple override of [UIActivityViewController](http://developer.apple.com/library/ios/#documentation/UIKit/Reference/UIActivityViewController_Class/Reference/Reference.html%23//apple_ref/occ/cl/UIActivityViewController) which makes it easier to set multiple items for each UIActivityType.
 
 ## Usage
 
@@ -18,7 +18,7 @@ Set your class as a `RDActivityViewControllerDelegate` delegate:
 
     ...
 
-Implement the required `activityViewController:activityViewController itemsForActivityType:activityType` method in the delegate. You should always return an `NSArray` of ![activityItems](http://developer.apple.com/library/ios/#documentation/UIKit/Reference/UIActivityViewController_Class/Reference/Reference.html%23//apple_ref/occ/cl/UIActivityViewController):
+Implement the required `activityViewController:activityViewController itemsForActivityType:activityType` method in the delegate. You should always return an `NSArray` of [activityItems](http://developer.apple.com/library/ios/#documentation/UIKit/Reference/UIActivityViewController_Class/Reference/Reference.html%23//apple_ref/occ/cl/UIActivityViewController):
 
     - (NSArray *)activityViewController:(NSArray *)activityViewController itemsForActivityType:(NSString *)activityType {
         if ([activityType isEqualToString:UIActivityTypeMail]) {
