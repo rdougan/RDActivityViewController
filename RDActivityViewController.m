@@ -1,0 +1,76 @@
+//
+//  RDActivityViewController.m
+//  APOD
+//
+//  Created by Robert Dougan on 11/5/12.
+//  Copyright (c) 2012 Robert Dougan. All rights reserved.
+//
+
+#import "RDActivityViewController.h"
+
+@interface RDActivityViewController () {
+    NSMutableDictionary *_itemsMapping;
+    int _maximumNumberOfItems;
+}
+
+@end
+
+@implementation RDActivityViewController
+
+@synthesize delegate = _delegate;
+
+- (id)initWithDelegate:(id)delegate {
+    return [self initWithDelegate:delegate maximumNumberOfItems:10];
+}
+
+- (id)initWithDelegate:(id)delegate maximumNumberOfItems:(int)maximumNumberOfItems {
+    _delegate = delegate;
+    NSMutableArray *items = [[NSMutableArray alloc] init];
+    int i;
+    
+    for (i = 0; i < maximumNumberOfItems; i++) {
+        [items addObject:self];
+    }
+    
+    self = [self initWithActivityItems:items applicationActivities:nil];
+    if (self) {
+        _itemsMapping = [[NSMutableDictionary alloc] init];
+    }
+    
+    return self;
+}
+
+- (id)activityViewController:(UIActivityViewController *)activityViewController itemForActivityType:(NSString *)activityType {
+    // Get the items if not already received
+    NSMutableDictionary *activity = [_itemsMapping objectForKey:activityType];
+    NSArray *items;
+    
+    if (!activity) {
+        items = [_delegate performSelector:@selector(activityViewController:itemsForActivityType:) withObject:self withObject:activityType];
+        activity = [[NSMutableDictionary alloc] initWithObjectsAndKeys:items, @"items", [NSNumber numberWithInt:0], @"index", nil];
+        
+        [_itemsMapping setObject:activity forKey:activityType];
+    } else {
+        items = [activity objectForKey:@"items"];
+    }
+    
+    // Get the item
+    int index = [[activity objectForKey:@"index"] integerValue];
+    id item = nil;
+    
+    if (index < [items count]) {
+        item = [items objectAtIndex:index];
+    }
+    
+    // Increase the index
+    index = index + 1;
+    [activity setObject:[NSNumber numberWithInt:index] forKey:@"index"];
+    
+    return item;
+}
+
+- (id)activityViewControllerPlaceholderItem:(UIActivityViewController *)activityViewController {
+    return @"";
+}
+
+@end
