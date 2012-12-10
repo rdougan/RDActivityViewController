@@ -25,6 +25,7 @@
 
 - (id)initWithDelegate:(id)delegate maximumNumberOfItems:(int)maximumNumberOfItems {
     _delegate = delegate;
+    _maximumNumberOfItems = maximumNumberOfItems;
     NSMutableArray *items = [[NSMutableArray alloc] init];
     int i;
     
@@ -62,8 +63,8 @@
         item = [items objectAtIndex:index];
     }
     
-    // Increase the index
-    index = index + 1;
+    // Increase the index, and reset
+    index = (index + 1) % _maximumNumberOfItems;
     [activity setObject:[NSNumber numberWithInt:index] forKey:@"index"];
     
     return item;
