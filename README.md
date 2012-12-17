@@ -35,3 +35,20 @@ This is a simple override of [UIActivityViewController](http://developer.apple.c
 * And finally, create the RDActivityViewController:
 
         RDActivityViewController *viewController = [[RDActivityViewController alloc] initWithDelegate:self];
+
+## Using with custom application activities
+
+To use a custom activity, you can call `[[RDActivityViewController alloc] initWithDelegate:self maximumNumberOfItems:numItems applicationActivities:appActivities placeholderItem:defaultPlaceholder];`
+    
+This lets you share items that might not be sharable with particular activity types (e.g. some UIActivity implementations may only accept NSURL, AVAsset, etc.. objects.)
+
+For example, using [TUSafariActivity](https://github.com/davbeck/TUSafariActivity) to open an item in Safari:
+
+```
+UIActivity *safariActivity = [[TUSafariActivity alloc] init];
+
+RDActivityViewController *viewController = [[RDActivityViewController alloc] initWithDelegate:viewControllerDelegate maximumNumberOfItems:10 applicationActivities:@[safariActivity] placeholderItem:[NSURL URLWithString:@"http://github.com"]];
+
+```
+
+Of course, you can still replace the placeholder item in your delegate method.
