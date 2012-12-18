@@ -13,8 +13,11 @@
 @interface RDActivityViewController : UIActivityViewController <UIActivityItemSource>
 
 @property (nonatomic, assign) id <RDActivityViewControllerDelegate> delegate;
+@property (nonatomic, copy) id placeholderItem;
 
 - (id)initWithDelegate:(id <RDActivityViewControllerDelegate>)delegate;
 - (id)initWithDelegate:(id)delegate maximumNumberOfItems:(int)maximumNumberOfItems;
+- (id)initWithDelegate:(id)delegate maximumNumberOfItems:(int)maximumNumberOfItems applicationActivities:(NSArray *)applicationActivities;
+- (id)initWithDelegate:(id)delegate maximumNumberOfItems:(int)maximumNumberOfItems applicationActivities:(NSArray *)applicationActivities placeholderItem:(id)placeholderItem;
 
 @end

@@ -18,14 +18,24 @@
 @implementation RDActivityViewController
 
 @synthesize delegate = _delegate;
+@synthesize placeholderItem = _placeholderItem;
 
-- (id)initWithDelegate:(id)delegate {
-    return [self initWithDelegate:delegate maximumNumberOfItems:10];
+- (id)initWithDelegate:(id<RDActivityViewControllerDelegate>)delegate {
+    return [self initWithDelegate:delegate maximumNumberOfItems:10 applicationActivities:nil placeholderItem:nil];
 }
 
 - (id)initWithDelegate:(id)delegate maximumNumberOfItems:(int)maximumNumberOfItems {
+    return [self initWithDelegate:delegate maximumNumberOfItems:maximumNumberOfItems applicationActivities:nil placeholderItem:nil];
+}
+
+- (id)initWithDelegate:(id)delegate maximumNumberOfItems:(int)maximumNumberOfItems applicationActivities:(NSArray *)applicationActivities {
+    return [self initWithDelegate:self maximumNumberOfItems:maximumNumberOfItems applicationActivities:applicationActivities placeholderItem:nil];
+}
+
+- (id)initWithDelegate:(id)delegate maximumNumberOfItems:(int)maximumNumberOfItems applicationActivities:(NSArray *)applicationActivities placeholderItem:(id)placeholderItem {
     _delegate = delegate;
     _maximumNumberOfItems = maximumNumberOfItems;
+    _placeholderItem = placeholderItem;
     NSMutableArray *items = [[NSMutableArray alloc] init];
     int i;
     
@@ -33,7 +43,7 @@
         [items addObject:self];
     }
     
-    self = [self initWithActivityItems:items applicationActivities:nil];
+    self = [self initWithActivityItems:items applicationActivities:applicationActivities];
     if (self) {
         _itemsMapping = [[NSMutableDictionary alloc] init];
     }
@@ -71,7 +81,8 @@
 }
 
 - (id)activityViewControllerPlaceholderItem:(UIActivityViewController *)activityViewController {
-    return @"";
+    if(_placeholderItem == nil) { return @""; }
+    return _placeholderItem;
 }
 
 @end
