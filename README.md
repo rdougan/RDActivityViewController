@@ -42,12 +42,13 @@ To use a custom activity, you can call `[[RDActivityViewController alloc] initWi
     
 This lets you share items that might not be sharable with particular activity types (e.g. some UIActivity implementations may only accept NSURL, AVAsset, etc.. objects.)
 
-For example, using [TUSafariActivity](https://github.com/davbeck/TUSafariActivity) to open an item in Safari:
+For example, using [TUSafariActivity](https://github.com/davbeck/TUSafariActivity) and [ARChromeActivity](https://github.com/alexruperez/ARChromeActivity) to open an item in Safari or Google Chrome:
 
 ```
 UIActivity *safariActivity = [[TUSafariActivity alloc] init];
+UIActivity *chromeActivity = [[ARChromeActivity alloc] init];
 
-RDActivityViewController *viewController = [[RDActivityViewController alloc] initWithDelegate:viewControllerDelegate maximumNumberOfItems:10 applicationActivities:@[safariActivity] placeholderItem:[NSURL URLWithString:@"http://github.com"]];
+RDActivityViewController *viewController = [[RDActivityViewController alloc] initWithDelegate:viewControllerDelegate maximumNumberOfItems:10 applicationActivities:@[safariActivity, chromeActivity] placeholderItem:[NSURL URLWithString:@"http://github.com"]];
 
 ```
 
