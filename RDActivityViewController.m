@@ -29,7 +29,7 @@
 }
 
 - (id)initWithDelegate:(id)delegate maximumNumberOfItems:(int)maximumNumberOfItems applicationActivities:(NSArray *)applicationActivities {
-    return [self initWithDelegate:self maximumNumberOfItems:maximumNumberOfItems applicationActivities:applicationActivities placeholderItem:nil];
+    return [self initWithDelegate:delegate maximumNumberOfItems:maximumNumberOfItems applicationActivities:applicationActivities placeholderItem:nil];
 }
 
 - (id)initWithDelegate:(id)delegate maximumNumberOfItems:(int)maximumNumberOfItems applicationActivities:(NSArray *)applicationActivities placeholderItem:(id)placeholderItem {
