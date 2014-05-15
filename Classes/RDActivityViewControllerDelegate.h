@@ -12,6 +12,15 @@
 
 @protocol RDActivityViewControllerDelegate <NSObject>
 
-- (NSArray *)activityViewController:(NSArray *)activityViewController itemsForActivityType:(NSString *)activityType;
+@required
+
+- (NSArray *)activityViewController:(RDActivityViewController *)activityViewController
+               itemsForActivityType:(NSString *)activityType;
+
+@optional
+
+- (NSString *)activityViewController:(RDActivityViewController *)activityViewController
+              subjectForActivityType:(NSString *)activityType;
+  // if activity supports a Subject field. iOS 7.0
 
 @end

@@ -85,4 +85,22 @@
     return _placeholderItem;
 }
 
+- (NSString *)activityViewController:(UIActivityViewController *)activityViewController
+              subjectForActivityType:(NSString *)activityType
+{
+   
+    NSString *subject;
+    
+    if ([_delegate respondsToSelector:@selector(activityViewController:subjectForActivityType:)]) {
+        subject = [_delegate
+                   performSelector:@selector(activityViewController:subjectForActivityType:)
+                        withObject:self
+                        withObject:activityType];
+    } else {
+        subject = nil;
+    }
+    
+    return subject;
+}
+
 @end
